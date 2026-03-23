@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/aside.css">
+    <link rel="stylesheet" href="../css/popup.css">
+    <link rel="stylesheet" href="../css/sidewallet.css">
+    <title>FinanceControl</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <aside class="aside_profile">
+        <div class="profile_content">
+            <div class="user_profile">
+                <div class="icon_profile icon">
+                    <img src="../img/profile_icons/hornet.png" alt="Foto de perfil" srcset="">
+                </div>
+                <div>
+                    <p class="username">Felipe</p>
+                    <span class="account-level">Plano Pro</span>
+                </div>
+            </div>
+            <div class="line"></div>
+            <nav>
+                <div class="features">
+                    <div class="icon_feature">
+                        <img src="../img/icons/kindness.png" alt="Visao geral" srcset="">
+                    </div>
+                    <p class="feature_name">Visao geral</p>
+                </div>
+                <div class="features">
+                    <div class="icon_feature">
+                        <img src="../img/icons/bar-chart.png" alt="Relatorios" srcset="">
+                    </div>
+                    <p class="feature_name">Relatorios</p>
+                </div>
+                <div class="features">
+                    <div class="icon_feature">
+                        <img src="../img/icons/trophy.png" alt="Metas" srcset="">
+                    </div>
+                    <p class="feature_name">Metas</p>
+                </div>
+                <div class="features">
+                    <div class="icon_feature">
+                        <img src="../img/icons/recycle-bin.png" alt="Historico" srcset="">
+                    </div>
+                    <p class="feature_name">Historico</p>
+                </div>
+            </nav>
+
+            <div class="pontos">
+                <p>Pontos acumulados</p>
+                <strong>1.280</strong>
+            </div>
+        </div>
+    </aside>
+    <main>
+        <section class="finance_elements">
+            <div class="finance_charts chart">
+                <div class="icon_charts">
+                    <img src="../img/icons/spending.png" alt="Receita mensal" srcset="">
+                </div>
+                <div>
+                    <small>Receita</small>
+                    <p>R$ 8.350</p>
+                </div>
+            </div>
+            <div class="finance_charts chart">
+                <div class="icon_charts">
+                    <img src="../img/icons/spending.png" alt="Investimentos">
+                </div>
+                <div>
+                    <small>Investimentos</small>
+                    <p>R$ 2.420</p>
+                </div>
+            </div>
+            <div class="finance_charts chart">
+                <div class="icon_charts">
+                    <img class="puts" alt="Gastos mensais" src="../img/icons/spending.png">
+                </div>
+                <div>
+                    <small>Gastos</small>
+                    <p>R$ 3.180</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="finance_transaction">
+            <div class="graphics">
+                <div class="graphics_header">
+                    <h2>Resumo financeiro</h2>
+                    <p>Acompanhe a relacao entre gastos e investimentos.</p>
+                </div>
+                <div class="chart-container">
+                    <canvas id="graficoFinanceiro"></canvas>
+                </div>
+                <div class="actions">
+                    <button class="btn btn_out" type="button" data-modal="gasto">+ Novo gasto</button>
+                    <button class="btn btn_in" type="button" data-modal="investimento">+ Novo investimento</button>
+                </div>
+            </div>
+        </section>
+        <div class="popup disable">
+            <div class="content_popup">
+                <div class="button_close">
+                    <button class="close" type="button" aria-label="Fechar modal">x</button>
+                </div>
+
+                <form method="get" class="content_in disable" action="" id="form">
+                    <div class="contentInfo">
+                        <h3 class="subtitles">Cadastrar gasto</h3>
+                        <input type="text" name="spend" id="spend" placeholder="Exemplo: Spotify" class="insertion" required>
+                        <label for="cashout">Valor gasto</label>
+                        <input type="number" name="cashout" id="cashout" class="cashout insertion" min="0" step="0.01" required>
+                        <label for="metodoGasto" class="subtitles">Escolha tipo de gasto</label>
+                        <select name="method" id="metodoGasto" class="metodo insertion">
+                            <option value="Card">Cartao</option>
+                            <option value="Mensalidade">Mensalidade</option>
+                            <option value="Pix">Pix</option>
+                        </select>
+                        <input type="submit" value="ENVIAR" class="submit insertion">
+                    </div>
+                </form>
+
+                <form method="get" class="content_in disable" action="" id="form_in">
+                    <div class="contentInfo">
+                        <h3 class="subtitles">Cadastrar investimento</h3>
+                        <input type="text" name="invest" id="invest" placeholder="Exemplo: Tesouro Selic" class="insertion" required>
+                        <label for="investValue">Valor investido</label>
+                        <input type="number" name="investValue" id="investValue" class="insertion" min="0" step="0.01" required>
+                        <label for="metodoInvest" class="subtitles">Tipo de investimento</label>
+                        <select name="method" id="metodoInvest" class="metodo insertion">
+                        <option value="poupanca">Poupanca/Caixinha</option>
+                        <option value="stocks">Acoes</option>
+                        <option value="cdb">CDB</option>
+                    </select>
+                    <input type="submit" value="ENVIAR" class="submit insertion">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <aside class="aside_wallet">
+        <div class="content_wallet">
+            <div class="icon_wallet ">
+                <div class="img_wallet">
+                    <p>Saldo em carteira</p>
+                    <strong>R$ 5.170,00</strong>
+                </div>
+            </div>
+            <p class="wallet_title">Metodos mais usados</p>
+
+            <div class="samples_content">
+                <div class="samples">
+                    <p>Cartao - 48%</p>
+                </div>
+                <div class="samples">
+                    <p>Pix - 33%</p>
+                </div>
+                <div class="samples">
+                    <p>Mensalidades - 19%</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+</body>
+
+<script src="../js/code.js"></script>
+<script src="../js/modal.js"></script>
+
+</html>
