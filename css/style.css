@@ -4,7 +4,7 @@
     --panel-muted: #eef2ff;
     --text: #0f172a;
     --text-soft: #64748b;
-    --primary: #2563eb;
+    --primary: #032221;
     --primary-strong: #1d4ed8;
     --success: #22c55e;
     --danger: #ef4444;
@@ -45,7 +45,7 @@ main {
     display: flex;
     align-items: center;
     gap: 12px;
-    background: linear-gradient(140deg, var(--primary), #38bdf8);
+    background: linear-gradient(140deg, var(--primary), #00DF81);
     color: #fff;
     border-radius: 16px;
     min-height: 88px;
