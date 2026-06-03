@@ -1,0 +1,13 @@
+@model Usuario
+@{ ViewData["Title"] = "Novo usuário"; }
+<div class="page-header"><h1>Novo usuário</h1></div>
+<div class="table-panel">
+    <form asp-action="Create" method="post">@Html.AntiForgeryToken()
+        <div class="form-group"><label asp-for="NomeCompleto"></label><input asp-for="NomeCompleto" class="form-control" /></div>
+        <div class="form-group"><label asp-for="NomeUsuario"></label><input asp-for="NomeUsuario" class="form-control" /></div>
+        <div class="form-group"><label asp-for="Email"></label><input asp-for="Email" class="form-control" /></div>
+        <div class="form-group"><label asp-for="Perfil"></label><select asp-for="Perfil" class="form-control" asp-items="Html.GetEnumSelectList<PerfilUsuario>()"></select></div>
+        <div class="form-group"><label>Senha</label><input name="senha" type="password" class="form-control" required /></div>
+        <button type="submit" class="btn-primary" style="width:auto">Salvar</button>
+    </form>
+</div>

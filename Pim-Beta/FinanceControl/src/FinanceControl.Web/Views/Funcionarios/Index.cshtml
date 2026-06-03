@@ -1,0 +1,107 @@
+@model IEnumerable<Funcionario>
+@{
+    ViewData["Title"] = "Funcionários";
+    var cultura = new System.Globalization.CultureInfo("pt-BR");
+    var abrirModal = string.Equals(TempData["AbrirModalFuncionario"]?.ToString(), "true", StringComparison.OrdinalIgnoreCase);
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/employer.css" asp-append-version="true" />
+}
+
+<div class="page-header">
+    <h1>Funcionários cadastrados</h1>
+    <button type="button" class="btn-new" id="btnAbrirModalFuncionario">Novo funcionário</button>
+</div>
+
+<div class="table-panel employer-panel">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cargo</th>
+                <th>Salário</th>
+                <th>Admissão</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="6" class="table-empty">Nenhum funcionário. Clique em Novo funcionário.</td>
+            </tr>
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nome</td>
+                <td>@(item.Cargo ?? "—")</td>
+                <td>@item.Salario.ToString("C", cultura)</td>
+                <td>@item.DataAdmissao.ToString("dd/MM/yyyy")</td>
+                <td>@(item.Ativo ? "Ativo" : "Inativo")</td>
+                <td class="acoes-cell">
+                    <a class="btn-sm btn-edit" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="form-inline-delete">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn-sm btn-delete" onclick="return confirm('Excluir @item.Nome?')">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    @if (Model.Any())
+    {
+        <p class="lista-total">Total: <strong>@Model.Count()</strong> funcionário(s)</p>
+    }
+</div>
+
+<div class="modal-overlay_employer" id="modalFuncionario" style="display:none">
+    <div class="modal modal-meta">
+        <div class="modal-top">
+            <h2>Novo funcionário</h2>
+            <span class="modal-close" id="btnFecharModalFuncionario" role="button" tabindex="0">✕</span>
+        </div>
+        <div class="modal-content">
+            <form asp-action="Create" method="post">
+                @Html.AntiForgeryToken()
+                <div class="input-group">
+                    <label for="funcNome">Nome</label>
+                    <input id="funcNome" name="Nome" class="form-control" required maxlength="120" />
+                </div>
+                <div class="input-group">
+                    <label for="funcCargo">Cargo</label>
+                    <input id="funcCargo" name="Cargo" class="form-control" maxlength="80" />
+                </div>
+                <div class="input-group">
+                    <label for="funcSalario">Salário</label>
+                    <input id="funcSalario" name="Salario" type="number" step="0.01" min="0" class="form-control" required />
+                </div>
+                <div class="input-group">
+                    <label for="funcData">Data de admissão</label>
+                    <input id="funcData" name="DataAdmissao" type="date" class="form-control" value="@DateTime.Today.ToString("yyyy-MM-dd")" required />
+                </div>
+                <input type="hidden" name="Ativo" value="true" />
+                <button type="submit" class="btn-cadastrar">Cadastrar funcionário</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            const modal = document.getElementById('modalFuncionario');
+            const abrir = document.getElementById('btnAbrirModalFuncionario');
+            const fechar = document.getElementById('btnFecharModalFuncionario');
+            function mostrar() { modal.style.display = 'flex'; }
+            function ocultar() { modal.style.display = 'none'; }
+            abrir?.addEventListener('click', mostrar);
+            fechar?.addEventListener('click', (e) => { e.stopPropagation(); ocultar(); });
+            modal?.addEventListener('click', (e) => { if (e.target === modal) ocultar(); });
+            @if (abrirModal) { <text>mostrar();</text> }
+        })();
+    </script>
+}

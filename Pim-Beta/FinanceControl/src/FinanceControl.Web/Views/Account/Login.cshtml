@@ -1,0 +1,75 @@
+@model LoginDto
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_Layout";
+}
+
+<div class="auth-page">
+    <div class="auth-card">
+        <h1>FinanceControl</h1>
+        <p class="subtitle">Acesso ao sistema financeiro</p>
+
+        @if (TempData["Sucesso"] != null)
+        {
+            <div class="alert alert-success auth-alert">@TempData["Sucesso"]</div>
+        }
+
+        <div asp-validation-summary="All" class="validation-summary-errors"></div>
+
+        <form asp-action="Login" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
+
+            <div class="form-group">
+                <label asp-for="NomeUsuario"></label>
+                <input asp-for="NomeUsuario" class="form-control" autocomplete="username" placeholder="Seu login" />
+                <span asp-validation-for="NomeUsuario" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Senha"></label>
+                <input asp-for="Senha" class="form-control" autocomplete="current-password" placeholder="Sua senha" />
+                <span asp-validation-for="Senha" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn-primary">Entrar</button>
+        </form>
+
+        <div class="auth-footer">
+            <a asp-action="Register" class="auth-footer-link">Criar conta</a>
+            <button type="button" class="auth-footer-btn" id="btnEsqueciSenha">Esqueceu a senha?</button>
+        </div>
+    </div>
+</div>
+
+<div class="auth-modal-overlay" id="modalEsqueciSenha" hidden>
+    <div class="auth-modal" role="dialog" aria-labelledby="tituloEsqueciSenha">
+        <button type="button" class="auth-modal-close" id="btnFecharEsqueciSenha" aria-label="Fechar">✕</button>
+        <h2 id="tituloEsqueciSenha">Recuperar senha</h2>
+        <p>Para redefinir sua senha, entre em contato com o <strong>administrador do sistema</strong>.</p>
+        <button type="button" class="btn-primary" id="btnOkEsqueciSenha">Entendi</button>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            const modal = document.getElementById('modalEsqueciSenha');
+            const abrir = document.getElementById('btnEsqueciSenha');
+            const fechar = document.getElementById('btnFecharEsqueciSenha');
+            const ok = document.getElementById('btnOkEsqueciSenha');
+            function mostrar() {
+                modal.hidden = false;
+                modal.style.display = 'flex';
+            }
+            function ocultar() {
+                modal.hidden = true;
+                modal.style.display = 'none';
+            }
+            abrir?.addEventListener('click', mostrar);
+            fechar?.addEventListener('click', ocultar);
+            ok?.addEventListener('click', ocultar);
+            modal?.addEventListener('click', (e) => { if (e.target === modal) ocultar(); });
+        })();
+    </script>
+}

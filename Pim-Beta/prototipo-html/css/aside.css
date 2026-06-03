@@ -1,0 +1,118 @@
+aside {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.aside_profile {
+    background: #226449;
+    color: #e2e8f0;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
+}
+
+.profile_content {
+    display: flex;
+    padding: 20px 16px;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.user_profile { 
+    display: flex;
+    align-items: center;
+    color: #f8fafc;
+    gap: 12px;
+    width: 100%;
+    min-height: 72px;
+}
+
+.username {
+    font-weight: 700;
+}
+
+.account-level {
+    font-size: 0.82rem;
+    color: #94a3b8;
+}
+
+.icon_profile {
+    height: 54px;
+    width: 54px;
+    border-radius: 100%;
+    border: 2px solid #334155;
+    overflow: hidden;
+}
+
+.icon_profile > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+nav > div {
+    width: 100%;
+    min-height: 42px;
+}
+
+.features {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 10px 12px;
+    transition: background-color 0.2s ease;
+}
+
+.features:hover {
+    background-color: #1e293b;
+    cursor: pointer;
+}
+
+.icon_feature {
+    width: 20px;
+    height: 20px;
+}
+
+.icon_feature > img {
+    width: 100%;
+    height: 100%;
+}
+
+.feature_name {
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.pontos {
+    margin-top: auto;
+    width: 100%;
+    border: 1px solid #334155;
+    background: #1e293b;
+    border-radius: 14px;
+    padding: 14px;
+}
+
+.pontos p {
+    color: #94a3b8;
+    margin-bottom: 4px;
+}
+
+.pontos strong {
+    color: #f8fafc;
+    font-size: 1.2rem;
+}
+
+.line { 
+    border: 1px solid #334155;
+    width: 100%;
+    margin-top: 16px;
+}

@@ -1,0 +1,27 @@
+@model IEnumerable<Despesa>
+@{ ViewData["Title"] = "Despesas"; }
+<div class="page-header"><h1>Despesas</h1><a class="btn-new" asp-action="Create">Nova despesa</a></div>
+<div class="table-panel">
+    <table class="data-table">
+        <thead><tr><th>Descrição</th><th>Valor</th><th>Data</th><th>Categoria</th><th></th></tr></thead>
+        <tbody>
+        @if (!Model.Any())
+        {
+            <tr><td colspan="5" class="table-empty">Nenhuma despesa. <a asp-action="Create">Cadastrar</a></td></tr>
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Descricao</td>
+                <td>R$ @item.Valor.ToString("N2")</td>
+                <td>@item.Data.ToString("dd/MM/yyyy")</td>
+                <td>@item.Categoria?.Nome</td>
+                <td>
+                    <a class="btn-sm btn-edit" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline">@Html.AntiForgeryToken()<button type="submit" class="btn-sm btn-delete" onclick="return confirm('Excluir?')">Excluir</button></form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

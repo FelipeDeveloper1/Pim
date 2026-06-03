@@ -1,0 +1,18 @@
+========================================
+  ABRIR O PROGRAMA — duplo clique
+========================================
+  index.html   (ou index.bat)
+
+========================================
+
+Pim-Beta/  ............... SISTEMA PRINCIPAL (HTML)
+  index.html .............. Login (abra aqui)
+  app.html ................ Sistema apos login
+  register.html ........... Criar conta
+  css/ js/ img/
+
+FinanceControl/ ........... ASP.NET (opcional, nao necessario)
+prototipo-html/ ............. Backup do layout antigo
+nextFinanceDB/ .............. SQL (so ASP.NET)
+
+Login: admin / Admin@123

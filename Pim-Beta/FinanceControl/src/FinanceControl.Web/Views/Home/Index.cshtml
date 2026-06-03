@@ -1,0 +1,78 @@
+@model DashboardResumoDto
+@{
+    ViewData["Title"] = "Visão geral";
+    var cultura = new System.Globalization.CultureInfo("pt-BR");
+}
+
+<section class="finance_elements">
+    <div class="finance_charts chart stat-card">
+        <div class="icon_charts"><img src="~/img/icons/spending.svg" alt="" /></div>
+        <div>
+            <small>Receita (mês)</small>
+            <p>@Model.TotalReceitas.ToString("C", cultura)</p>
+        </div>
+    </div>
+    <div class="finance_charts chart stat-card">
+        <div class="icon_charts"><img src="~/img/icons/spending.svg" alt="" /></div>
+        <div>
+            <small>Investimentos (mês)</small>
+            <p>@Model.TotalInvestimentos.ToString("C", cultura)</p>
+        </div>
+    </div>
+    <div class="finance_charts chart stat-card">
+        <div class="icon_charts"><img src="~/img/icons/spending.svg" alt="" /></div>
+        <div>
+            <small>Gastos (mês)</small>
+            <p>@Model.TotalDespesas.ToString("C", cultura)</p>
+        </div>
+    </div>
+</section>
+
+<section class="finance_transaction">
+    <div class="graphics">
+        <div class="graphics_header">
+            <h2>Gastos cadastrados</h2>
+            <p>Total: <strong>@Model.TotalGastos.ToString("C", cultura)</strong> · Saldo em contas: @Model.SaldoContas.ToString("C", cultura)</p>
+        </div>
+        <div class="table-panel">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Data</th>
+                        <th>Categoria</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @if (!Model.Gastos.Any())
+                {
+                    <tr>
+                        <td colspan="4" class="table-empty">
+                            Nenhum gasto cadastrado. <a asp-controller="Despesas" asp-action="Create">Cadastrar despesa</a>
+                        </td>
+                    </tr>
+                }
+                @foreach (var gasto in Model.Gastos)
+                {
+                    <tr>
+                        <td>@gasto.Descricao</td>
+                        <td>@gasto.Valor.ToString("C", cultura)</td>
+                        <td>@gasto.Data.ToString("dd/MM/yyyy")</td>
+                        <td>@gasto.Categoria</td>
+                    </tr>
+                }
+                </tbody>
+                @if (Model.Gastos.Any())
+                {
+                    <tfoot>
+                        <tr class="table-total-row">
+                            <td><strong>Total</strong></td>
+                            <td colspan="3"><strong>@Model.TotalGastos.ToString("C", cultura)</strong></td>
+                        </tr>
+                    </tfoot>
+                }
+            </table>
+        </div>
+    </div>
+</section>

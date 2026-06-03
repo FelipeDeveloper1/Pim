@@ -1,0 +1,27 @@
+@model IEnumerable<Usuario>
+@{ ViewData["Title"] = "Usuários"; }
+<div class="page-header"><h1>Usuários</h1><a class="btn-new" asp-action="Create">Novo usuário</a></div>
+<div class="table-panel">
+    <table class="data-table">
+        <thead><tr><th>Nome</th><th>Usuário</th><th>E-mail</th><th>Perfil</th><th>Ativo</th><th></th></tr></thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.NomeCompleto</td>
+                <td>@item.NomeUsuario</td>
+                <td>@item.Email</td>
+                <td>@item.Perfil</td>
+                <td>@(item.Ativo ? "Sim" : "Não")</td>
+                <td>
+                    <a class="btn-sm btn-edit" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                    @if (item.NomeUsuario != "admin")
+                    {
+                        <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline">@Html.AntiForgeryToken()<button type="submit" class="btn-sm btn-delete" onclick="return confirm('Excluir?')">Excluir</button></form>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

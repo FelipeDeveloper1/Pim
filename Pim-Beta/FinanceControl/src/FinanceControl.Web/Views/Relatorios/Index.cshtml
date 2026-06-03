@@ -1,0 +1,98 @@
+@model RelatorioResumoDto
+@{
+    ViewData["Title"] = "Relatórios";
+    var cultura = new System.Globalization.CultureInfo("pt-BR");
+}
+
+<div class="page-header">
+    <h1>Relatórios — @Model.Mes/@Model.Ano</h1>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <a class="btn-new" asp-controller="Lancamentos" asp-action="Create" asp-route-tipo="@((int)TipoLancamentoFinanceiro.Gasto)">+ Gasto</a>
+        <a class="btn-new" asp-controller="Lancamentos" asp-action="Create" asp-route-tipo="@((int)TipoLancamentoFinanceiro.Investimento)">+ Investimento</a>
+    </div>
+    <form method="get" class="filtro-relatorio">
+        <select name="mes" class="form-control">
+            @for (var m = 1; m <= 12; m++)
+            {
+                <option value="@m" selected="@(m == Model.Mes)">@System.Globalization.CultureInfo.GetCultureInfo("pt-BR").DateTimeFormat.GetMonthName(m)</option>
+            }
+        </select>
+        <input type="number" name="ano" class="form-control" value="@Model.Ano" min="2020" max="2100" />
+        <button type="submit" class="btn-new">Filtrar</button>
+    </form>
+</div>
+
+<section class="finance_elements">
+    <div class="chart stat-card">
+        <small>Total de gastos</small>
+        <p>@Model.TotalGastos.ToString("C", cultura)</p>
+    </div>
+    <div class="chart stat-card">
+        <small>Total de investimentos</small>
+        <p>@Model.TotalInvestimentos.ToString("C", cultura)</p>
+    </div>
+    <div class="chart stat-card">
+        <small>Saldo final</small>
+        <p>@Model.SaldoFinal.ToString("C", cultura)</p>
+    </div>
+</section>
+
+<div class="table-panel" style="margin-bottom:16px">
+    <h2>Lista de gastos</h2>
+    <table class="data-table">
+        <thead><tr><th>Descrição</th><th>Valor</th><th>Data</th></tr></thead>
+        <tbody>
+        @if (!Model.Gastos.Any())
+        {
+            <tr><td colspan="3" class="table-empty">Nenhum gasto no período.</td></tr>
+        }
+        @foreach (var g in Model.Gastos)
+        {
+            <tr>
+                <td>@g.Descricao</td>
+                <td>@g.Valor.ToString("C", cultura)</td>
+                <td>@g.Data.ToString("dd/MM/yyyy")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+<div class="table-panel" style="margin-bottom:16px">
+    <h2>Lista de investimentos</h2>
+    <table class="data-table">
+        <thead><tr><th>Descrição</th><th>Valor</th><th>Data</th></tr></thead>
+        <tbody>
+        @if (!Model.Investimentos.Any())
+        {
+            <tr><td colspan="3" class="table-empty">Nenhum investimento no período.</td></tr>
+        }
+        @foreach (var i in Model.Investimentos)
+        {
+            <tr>
+                <td>@i.Descricao</td>
+                <td>@i.Valor.ToString("C", cultura)</td>
+                <td>@i.Data.ToString("dd/MM/yyyy")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+<div class="table-panel">
+    <h2>Resumo do mês (receitas e despesas)</h2>
+    <p>Receitas: @Model.ReceitasMes.ToString("C", cultura) · Despesas: @Model.DespesasMes.ToString("C", cultura) · Saldo: @Model.SaldoMes.ToString("C", cultura)</p>
+    <table class="data-table">
+        <thead><tr><th>Categoria</th><th>Total despesas</th></tr></thead>
+        <tbody>
+        @if (!Model.PorCategoria.Any())
+        {
+            <tr><td colspan="2" class="table-empty">Sem despesas por categoria neste mês.</td></tr>
+        }
+        @foreach (var c in Model.PorCategoria)
+        {
+            <tr><td>@c.Nome</td><td>@c.Total.ToString("C", cultura)</td></tr>
+        }
+        </tbody>
+    </table>
+</div>

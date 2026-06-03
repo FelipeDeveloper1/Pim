@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "FinanceControl.Web": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "launchUrl": "Account/Login",
+      "applicationUrl": "http://localhost:5150",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

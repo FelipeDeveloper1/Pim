@@ -1,0 +1,84 @@
+@{
+    var isAuthPage = ViewContext.RouteData.Values["controller"]?.ToString() == "Account";
+    var nome = User.FindFirst("Nome")?.Value ?? User.Identity?.Name ?? "Usuário";
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+    string NavClass(string c) => controller == c ? "features active" : "features";
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FinanceControl</title>
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    @if (!isAuthPage)
+    {
+        <link rel="stylesheet" href="~/css/aside.css" asp-append-version="true" />
+    }
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @if (!isAuthPage)
+    {
+        <link rel="stylesheet" href="~/css/popup.css" asp-append-version="true" />
+    }
+    @RenderSection("Styles", required: false)
+</head>
+<body class="@(isAuthPage ? "layout-auth" : "layout-app")">
+@if (isAuthPage)
+{
+    @RenderBody()
+}
+else
+{
+    <aside class="aside_profile">
+        <div class="profile_content">
+            <div class="user_profile">
+                <div class="icon_profile">
+                    <img src="~/img/profile_icons/hornet.svg" alt="Perfil" />
+                </div>
+                <div>
+                    <p class="username">@nome</p>
+                    <span class="account-level">FinanceControl</span>
+                </div>
+            </div>
+            <div class="line"></div>
+            <nav>
+                <div class="@NavClass("Home")"><a class="feature_name" asp-controller="Home" asp-action="Index">Visão geral</a></div>
+                <div class="@NavClass("Relatorios")"><a class="feature_name" asp-controller="Relatorios" asp-action="Index">Relatórios</a></div>
+                <div class="@NavClass("Metas")"><a class="feature_name" asp-controller="Metas" asp-action="Index" asp-route-nova="1">Metas</a></div>
+                <div class="@NavClass("Funcionarios")"><a class="feature_name" asp-controller="Funcionarios" asp-action="Index" asp-route-nova="1">Funcionários</a></div>
+                <div class="@NavClass("Receitas")"><a class="feature_name" asp-controller="Receitas" asp-action="Index">Receitas</a></div>
+                <div class="@NavClass("Despesas")"><a class="feature_name" asp-controller="Despesas" asp-action="Index">Despesas</a></div>
+                <div class="@NavClass("Movimentacoes")"><a class="feature_name" asp-controller="Movimentacoes" asp-action="Index">Movimentações</a></div>
+                <div class="@NavClass("Categorias")"><a class="feature_name" asp-controller="Categorias" asp-action="Index">Categorias</a></div>
+                <div class="@NavClass("Contas")"><a class="feature_name" asp-controller="Contas" asp-action="Index">Contas</a></div>
+                @if (User.FindFirst("Perfil")?.Value == "Admin")
+                {
+                    <div class="@NavClass("Usuarios")"><a class="feature_name" asp-controller="Usuarios" asp-action="Index">Usuários</a></div>
+                }
+            </nav>
+            <div class="pontos">
+                <form asp-controller="Account" asp-action="Logout" method="post">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn-sm btn-edit" style="width:100%">Sair</button>
+                </form>
+            </div>
+        </div>
+    </aside>
+    <div class="layout-main">
+        @if (TempData["Sucesso"] != null)
+        {
+            <div class="alert alert-success">@TempData["Sucesso"]</div>
+        }
+        @if (TempData["Erro"] != null)
+        {
+            <div class="alert alert-error">@TempData["Erro"]</div>
+        }
+        @RenderBody()
+    </div>
+}
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.20.0/dist/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation-unobtrusive@4.0.0/dist/jquery.validate.unobtrusive.min.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

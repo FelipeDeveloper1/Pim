@@ -1,0 +1,4 @@
+Esta pasta e a versao ASP.NET (opcional).
+
+Para usar o sistema com duplo clique, volte a pasta Pim-Beta
+e abra index.html — nao precisa instalar .NET nem SQL.

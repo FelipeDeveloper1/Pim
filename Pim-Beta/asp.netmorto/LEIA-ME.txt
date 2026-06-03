@@ -1,0 +1,15 @@
+========================================
+  FINANCECONTROL — COMO ABRIR
+========================================
+
+Duplo clique em:  index.html  (ou index.bat)
+
+Login: admin
+Senha: Admin@123
+
+Se nao abrir:
+  - Use Chrome ou Edge
+  - Abra a pasta Pim-Beta (nao so FinanceControl)
+  - Confira se existem as pastas css, js e img
+
+========================================

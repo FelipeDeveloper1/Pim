@@ -1,0 +1,27 @@
+@model IEnumerable<Categoria>
+@{ ViewData["Title"] = "Categorias"; }
+<div class="page-header">
+    <h1>Categorias</h1>
+    <a class="btn-new" asp-action="Create">Nova categoria</a>
+</div>
+<div class="table-panel">
+    <table class="data-table">
+        <thead><tr><th>Nome</th><th>Tipo</th><th></th></tr></thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nome</td>
+                <td>@item.Tipo</td>
+                <td>
+                    <a class="btn-sm btn-edit" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn-sm btn-delete" onclick="return confirm('Excluir?')">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

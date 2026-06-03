@@ -1,0 +1,29 @@
+@model LancamentoFinanceiro
+@{
+    ViewData["Title"] = "Novo lançamento";
+}
+
+<div class="page-header"><h1>Novo lançamento (relatório)</h1></div>
+<div class="table-panel">
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label asp-for="Tipo"></label>
+            <select asp-for="Tipo" class="form-control" asp-items="Html.GetEnumSelectList<TipoLancamentoFinanceiro>()"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Observacao"></label>
+            <input asp-for="Observacao" class="form-control" placeholder="Descrição" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Valor"></label>
+            <input asp-for="Valor" type="number" step="0.01" min="0.01" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Data"></label>
+            <input asp-for="Data" type="date" class="form-control" />
+        </div>
+        <button type="submit" class="btn-primary" style="width:auto">Salvar</button>
+        <a asp-controller="Relatorios" asp-action="Index" class="btn-sm btn-edit">Voltar</a>
+    </form>
+</div>

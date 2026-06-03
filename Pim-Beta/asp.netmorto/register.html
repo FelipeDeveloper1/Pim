@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinanceControl — Criar conta</title>
+    <link rel="stylesheet" href="css/auth.css" />
+  </head>
+  <body class="auth-only">
+    <div class="auth-card">
+      <h1>Criar conta</h1>
+      <p class="subtitle">Cadastre-se no FinanceControl</p>
+      <div id="erroRegister" class="erro-msg"></div>
+      <form id="formRegister">
+        <label for="nome">Nome completo</label>
+        <input id="nome" name="nome" required />
+        <label for="login">Login</label>
+        <input id="login" name="login" required autocomplete="username" />
+        <label for="senha">Senha</label>
+        <input id="senha" name="senha" type="password" required minlength="6" />
+        <label for="confirmar">Confirmar senha</label>
+        <input id="confirmar" name="confirmar" type="password" required />
+        <button type="submit">Criar conta</button>
+      </form>
+      <p class="auth-links"><a href="index.html">Voltar ao login</a></p>
+    </div>
+    <script src="js/storage.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+      fcBindRegister("formRegister");
+    </script>
+  </body>
+</html>

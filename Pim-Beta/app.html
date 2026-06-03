@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinanceControl</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/aside.css" />
+    <link rel="stylesheet" href="css/auth.css" />
+  </head>
+  <body class="app-layout">
+    <aside class="aside_profile">
+      <div class="profile_content">
+        <div class="user_profile">
+          <div class="icon_profile">
+            <img src="img/profile_icons/hornet.svg" alt="Perfil" width="48" height="48" />
+          </div>
+          <div>
+            <p class="username" id="userName">Usuário</p>
+            <span class="account-level">FinanceControl</span>
+          </div>
+        </div>
+        <div class="line"></div>
+        <nav>
+          <div class="features active" data-view="visao">Visão geral</div>
+          <div class="features" data-view="relatorios">Relatórios</div>
+          <div class="features" data-view="metas">Metas</div>
+          <div class="features" data-view="funcionarios">Funcionários</div>
+        </nav>
+        <div style="margin-top: auto; padding-top: 16px">
+          <button type="button" class="btn-logout" id="btnLogout">Sair</button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <!-- Visão geral -->
+      <section id="view-visao" class="view-panel active">
+        <div class="page-header">
+          <h1>Visão geral</h1>
+          <button type="button" class="btn-new" id="btnNovoGasto">Novo gasto</button>
+        </div>
+        <div class="resumo-cards">
+          <div class="resumo-card">
+            <small>Gastos cadastrados</small>
+            <p id="cardGastos">R$ 0,00</p>
+          </div>
+          <div class="resumo-card">
+            <small>Investimentos (relatório)</small>
+            <p id="cardInvest">R$ 0,00</p>
+          </div>
+          <div class="resumo-card">
+            <small>Gastos (lançamentos)</small>
+            <p id="cardLancGastos">R$ 0,00</p>
+          </div>
+        </div>
+
+        <p id="chartsAviso" class="charts-aviso" style="display: none"></p>
+        <div class="charts-row">
+          <div class="chart-panel">
+            <h3 class="chart-panel-title">Gastos por categoria</h3>
+            <div class="chart-canvas-wrap">
+              <canvas id="graficoPizza" aria-label="Gráfico pizza"></canvas>
+            </div>
+          </div>
+          <div class="chart-panel">
+            <h3 class="chart-panel-title">Evolução mensal</h3>
+            <div class="chart-canvas-wrap">
+              <canvas id="graficoLinha" aria-label="Gráfico de linhas"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-panel" style="margin-top: 16px">
+          <h2 style="margin-bottom: 12px">Gastos cadastrados</h2>
+          <p style="margin-bottom: 12px">
+            Total: <strong id="totalGastosVisao">R$ 0,00</strong>
+          </p>
+          <table class="data-table" id="tabelaGastos">
+            <thead>
+              <tr>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th>Data</th>
+                <th>Categoria</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Relatórios -->
+      <section id="view-relatorios" class="view-panel">
+        <div class="page-header">
+          <h1>Relatórios</h1>
+          <button type="button" class="btn-new" id="btnNovoLanc">Novo lançamento</button>
+        </div>
+        <div class="resumo-cards">
+          <div class="resumo-card">
+            <small>Total gastos</small>
+            <p id="relTotalGastos">R$ 0,00</p>
+          </div>
+          <div class="resumo-card">
+            <small>Total investimentos</small>
+            <p id="relTotalInv">R$ 0,00</p>
+          </div>
+          <div class="resumo-card">
+            <small>Saldo final</small>
+            <p id="relSaldo">R$ 0,00</p>
+          </div>
+        </div>
+        <div class="table-panel" style="margin-top: 16px">
+          <h3>Gastos</h3>
+          <table class="data-table" id="tabelaRelGastos">
+            <thead>
+              <tr><th>Data</th><th>Observação</th><th>Valor</th><th>Ações</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="table-panel" style="margin-top: 16px">
+          <h3>Investimentos</h3>
+          <table class="data-table" id="tabelaRelInv">
+            <thead>
+              <tr><th>Data</th><th>Observação</th><th>Valor</th><th>Ações</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Metas -->
+      <section id="view-metas" class="view-panel">
+        <div class="page-header">
+          <h1>Metas</h1>
+          <button type="button" class="btn-new" id="btnNovaMeta">Nova meta</button>
+        </div>
+        <div class="table-panel">
+          <table class="data-table" id="tabelaMetas">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Funcionário</th>
+                <th>Valor objetivo</th>
+                <th>Valor atual</th>
+                <th>Data limite</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Funcionários -->
+      <section id="view-funcionarios" class="view-panel">
+        <div class="page-header">
+          <h1>Funcionários</h1>
+          <button type="button" class="btn-new" id="btnNovoFunc">Novo funcionário</button>
+        </div>
+        <div class="table-panel">
+          <table class="data-table" id="tabelaFuncionarios">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Cargo</th>
+                <th>Salário</th>
+                <th>Admissão</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal Meta -->
+    <div class="modal-overlay-app" id="modalMeta">
+      <div class="modal-box">
+        <h2 id="tituloModalMeta">Nova meta</h2>
+        <form id="formMeta">
+          <input type="hidden" name="editId" />
+          <label>Nome da meta</label>
+          <input name="nome" required />
+          <label>Funcionário responsável</label>
+          <select name="funcionarioId" id="selectMetaFuncionario"></select>
+          <label>Valor objetivo</label>
+          <input name="valorObjetivo" type="number" step="0.01" min="0" required />
+          <label>Valor atual</label>
+          <input name="valorAtual" type="number" step="0.01" min="0" value="0" />
+          <label>Data limite</label>
+          <input name="dataLimite" type="date" required />
+          <div class="modal-actions">
+            <button type="submit" class="btn-new">Salvar</button>
+            <button type="button" class="btn-sm" data-close-modal>Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal Funcionário -->
+    <div class="modal-overlay-app" id="modalFunc">
+      <div class="modal-box">
+        <h2 id="tituloModalFunc">Novo funcionário</h2>
+        <form id="formFunc">
+          <input type="hidden" name="editId" />
+          <label>Nome</label>
+          <input name="nome" required />
+          <label>Cargo</label>
+          <input name="cargo" />
+          <label>Salário</label>
+          <input name="salario" type="number" step="0.01" min="0" required />
+          <label>Data de admissão</label>
+          <input name="dataAdmissao" type="date" required />
+          <div class="modal-actions">
+            <button type="submit" class="btn-new">Cadastrar</button>
+            <button type="button" class="btn-sm" data-close-modal>Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal Gasto -->
+    <div class="modal-overlay-app" id="modalGasto">
+      <div class="modal-box">
+        <h2 id="tituloModalGasto">Novo gasto</h2>
+        <form id="formGasto">
+          <input type="hidden" name="editId" />
+          <label>Descrição</label>
+          <input name="descricao" required />
+          <label>Valor</label>
+          <input name="valor" type="number" step="0.01" min="0" required />
+          <label>Data</label>
+          <input name="data" type="date" required />
+          <label>Categoria</label>
+          <input name="categoria" placeholder="Ex: Moradia" />
+          <div class="modal-actions">
+            <button type="submit" class="btn-new">Salvar</button>
+            <button type="button" class="btn-sm" data-close-modal>Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal Lançamento -->
+    <div class="modal-overlay-app" id="modalLanc">
+      <div class="modal-box">
+        <h2 id="tituloModalLanc">Novo lançamento</h2>
+        <form id="formLanc">
+          <input type="hidden" name="editId" />
+          <label>Tipo</label>
+          <select name="tipo" required>
+            <option value="gasto">Gasto</option>
+            <option value="investimento">Investimento</option>
+          </select>
+          <label>Valor</label>
+          <input name="valor" type="number" step="0.01" min="0" required />
+          <label>Observação</label>
+          <input name="observacao" />
+          <label>Data</label>
+          <input name="data" type="date" required />
+          <div class="modal-actions">
+            <button type="submit" class="btn-new">Salvar</button>
+            <button type="button" class="btn-sm" data-close-modal>Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="js/vendor/chart.umd.min.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/charts-visao.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,173 @@
+:root {
+    --bg: #f4f7ff;
+    --panel: #ffffff;
+    --panel-muted: #eef2ff;
+    --text: #0f172a;
+    --text-soft: #64748b;
+    --primary: #032221;
+    --primary-strong: #1d4ed8;
+    --success: #22c55e;
+    --danger: #ef4444;
+    --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: var(--text);
+    background: linear-gradient(180deg, #eef4ff 0%, var(--bg) 100%);
+}
+
+body:not(.app-layout):not(.auth-only) {
+    display: grid;
+    grid-template-columns: 280px 1fr 280px;
+    gap: 18px;
+    padding: 18px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+}
+
+.finance_elements {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.chart {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(140deg, var(--primary), #00DF81);
+    color: #fff;
+    border-radius: 16px;
+    min-height: 88px;
+    padding: 16px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.chart:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(37, 99, 235, 0.25);
+    cursor: pointer;
+}
+
+.chart small {
+    display: block;
+    opacity: 0.9;
+}
+
+.chart p {
+    margin-top: 4px;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.icon_charts {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.22);
+    border-radius: 12px;
+}
+
+.icon_charts > img {
+    width: 22px;
+    height: 22px;
+}
+
+.finance_transaction {
+    flex: 1;
+}
+
+.graphics {
+    height: 100%;
+    width: 100%;
+    background: var(--panel);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.graphics_header h2 {
+    font-size: 1.3rem;
+}
+
+.graphics_header p {
+    color: var(--text-soft);
+    margin-top: 4px;
+}
+
+.chart-container {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    background: #0f172a;
+    border-radius: 16px;
+    padding: 16px;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: auto;
+}
+
+.btn {
+    border: 0;
+    border-radius: 999px;
+    padding: 11px 18px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    opacity: 0.95;
+}
+
+.btn_out {
+    background: var(--danger);
+}
+
+.btn_in {
+    background: var(--success);
+}
+
+@media (max-width: 1200px) {
+    body {
+        grid-template-columns: 220px 1fr;
+    }
+
+    .aside_wallet {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 800px) {
+    body {
+        grid-template-columns: 1fr;
+    }
+
+    .finance_elements {
+        grid-template-columns: 1fr;
+    }
+}

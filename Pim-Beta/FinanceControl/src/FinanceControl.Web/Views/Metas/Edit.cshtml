@@ -1,0 +1,14 @@
+@model Meta
+@{ ViewData["Title"] = "Editar meta"; }
+<div class="page-header"><h1>Editar meta</h1></div>
+<div class="table-panel">
+    <form asp-action="Edit" method="post">@Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group"><label asp-for="Titulo"></label><input asp-for="Titulo" class="form-control" /></div>
+        <div class="form-group"><label asp-for="ValorAlvo"></label><input asp-for="ValorAlvo" class="form-control" /></div>
+        <div class="form-group"><label asp-for="ValorAtual"></label><input asp-for="ValorAtual" class="form-control" /></div>
+        <div class="form-group"><label asp-for="DataLimite"></label><input asp-for="DataLimite" type="date" class="form-control" /></div>
+        <div class="form-group"><label asp-for="Concluida"></label><input asp-for="Concluida" type="checkbox" /></div>
+        <button type="submit" class="btn-primary" style="width:auto">Salvar</button>
+    </form>
+</div>
