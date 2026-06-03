@@ -5,13 +5,13 @@ function fcCurrentPage() {
   const href = (window.location.href || "").toLowerCase();
   if (path.endsWith("register.html") || href.endsWith("register.html")) return "register.html";
   if (path.endsWith("app.html") || href.endsWith("app.html")) return "app.html";
-  if (path.endsWith("index.html") || href.endsWith("index.html")) return "index.html";
-  if (path.endsWith("/") || href.endsWith("/")) return "index.html";
-  return path.split("/").pop() || "index.html";
+  // if (path.endsWith("index.html") || href.endsWith("index.html")) return "index.html";
+  // if (path.endsWith("/") || href.endsWith("/")) return "index.html";
+  return path.split("/").pop() || "app.html";
 }
 
 const fcPage = fcCurrentPage();
-if (fcGetSession() && (fcPage === "index.html" || fcPage === "register.html")) {
+if (fcGetSession() && (fcPage === "app.html" || fcPage === "register.html")) {
   window.location.href = "app.html";
 }
 
@@ -61,6 +61,6 @@ function fcBindRegister(formId) {
       return;
     }
     alert("Conta criada! Faça login.");
-    window.location.href = "index.html";
+    window.location.href = "app.html";
   });
 }
