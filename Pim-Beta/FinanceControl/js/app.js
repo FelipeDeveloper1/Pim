@@ -1,7 +1,7 @@
 fcInit();
-if (!fcGetSession()) {
-  window.location.href = "index.html";
-}
+// if (!fcGetSession()) {
+//   window.location.href = "index.html";
+// }
 
 const usuario = fcGetUsuarioLogado();
 const nomeEl = document.getElementById("userName");
@@ -9,7 +9,7 @@ if (nomeEl && usuario) nomeEl.textContent = usuario.nome || usuario.login;
 
 document.getElementById("btnLogout")?.addEventListener("click", () => {
   fcClearSession();
-  window.location.href = "index.html";
+  window.location.href = "app.html";
 });
 
 const views = document.querySelectorAll(".view-panel");

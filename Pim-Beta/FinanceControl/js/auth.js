@@ -1,7 +1,7 @@
 fcInit();
 
-const fcPage = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
-if (fcGetSession() && (fcPage === "index.html" || fcPage === "register.html" || fcPage === "")) {
+const fcPage = (window.location.pathname.split("/").pop() || "app.html").toLowerCase();
+if (fcGetSession() && (fcPage === "app.html" || fcPage === "register.html" || fcPage === "")) {
   window.location.href = "app.html";
 }
 
@@ -51,6 +51,6 @@ function fcBindRegister(formId) {
       return;
     }
     alert("Conta criada! Faça login.");
-    window.location.href = "index.html";
+    window.location.href = "app.html";
   });
 }
