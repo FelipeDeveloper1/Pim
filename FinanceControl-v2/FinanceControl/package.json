@@ -1,0 +1,13 @@
+{
+  "name": "financecontrol",
+  "version": "2.0.0",
+  "description": "FinanceControl — gestão financeira empresarial (API REST + Web + Mobile PWA)",
+  "private": true,
+  "license": "UNLICENSED",
+  "engines": { "node": ">=22.13.0" },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning api/server.js",
+    "demo": "node --disable-warning=ExperimentalWarning api/server.js --demo",
+    "test": "node --disable-warning=ExperimentalWarning --test --test-reporter=spec \"api/test/*.test.js\""
+  }
+}

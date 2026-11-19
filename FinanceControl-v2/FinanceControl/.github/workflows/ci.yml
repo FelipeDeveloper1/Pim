@@ -1,0 +1,41 @@
+name: CI/CD
+on:
+  push: { branches: [main] }
+  pull_request:
+jobs:
+  build-test:           # Commit/Push → Build → Testes → Análise (seção 3.8.1)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Análise estática (sintaxe de todo o JavaScript)
+        run: find api shared web mobile -name '*.js' -print0 | xargs -0 -n1 node --check
+      - name: Verificar que não há segredos versionados
+        run: "! git ls-files | grep -E '(^|/)(\\.env|\\.jwt-secret|.*\\.db)$'"
+      - name: Testes automatizados
+        run: npm test
+  imagem:               # Construção da imagem + smoke test
+    needs: build-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t financecontrol:${{ github.sha }} .
+      - name: Smoke test
+        run: |
+          docker run -d --name fc -p 3000:3000 -e JWT_SECRET=ci-secret-ci-secret -e ADMIN_PASSWORD=Ci-Admin-123 financecontrol:${{ github.sha }}
+          for i in $(seq 1 15); do curl -fsS http://localhost:3000/api/health && exit 0; sleep 1; done
+          docker logs fc; exit 1
+  deploy-homologacao:   # Placeholder: a escolha do provedor (seção 3.8) ainda não foi feita.
+    needs: imagem
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: homologacao
+    steps:
+      - run: echo "Publicar a imagem no registro e implantar em homologação (definir provedor)."
+  deploy-producao:      # O environment "producao" deve exigir aprovação manual (Settings → Environments → Required reviewers).
+    needs: deploy-homologacao
+    runs-on: ubuntu-latest
+    environment: producao
+    steps:
+      - run: echo "Implantar versão aprovada em produção, com rollback para a imagem anterior."

@@ -1,0 +1,15 @@
+services:
+  financecontrol:
+    build: .
+    ports: ["3000:3000"]
+    environment:
+      # Segredos vêm do arquivo .env (nunca versionado). Copie .env.example para .env e preencha.
+      JWT_SECRET: ${JWT_SECRET:?defina JWT_SECRET no .env}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?defina ADMIN_PASSWORD no .env}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@financecontrol.local}
+      ALLOW_REGISTRATION: ${ALLOW_REGISTRATION:-true}
+      TRUST_PROXY: ${TRUST_PROXY:-false}   # true somente atrás de proxy/balanceador confiável (HTTPS)
+    volumes: ["fc-data:/data"]
+    restart: unless-stopped
+volumes:
+  fc-data:

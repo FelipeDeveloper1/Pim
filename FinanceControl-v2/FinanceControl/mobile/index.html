@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b5d45">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>FinanceControl</title>
+  <link rel="manifest" href="/mobile/manifest.webmanifest">
+  <link rel="icon" href="/mobile/icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/mobile/icons/icon-192.png">
+  <link rel="stylesheet" href="/mobile/css/mobile.css">
+</head>
+<body>
+  <div id="offline" role="status" hidden>Sem conexão com a internet. Conecte-se para continuar.</div>
+  <div id="app"></div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="/shared/vendor/chart.umd.min.js"></script>
+  <script src="/shared/api.js"></script>
+  <script src="/shared/format.js"></script>
+  <script src="/mobile/js/mobile.js"></script>
+</body>
+</html>

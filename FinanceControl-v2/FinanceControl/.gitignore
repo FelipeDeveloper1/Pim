@@ -1,0 +1,8 @@
+data/
+node_modules/
+.env
+*.db
+*.db-wal
+*.db-shm
+.jwt-secret
+e2e/screenshots/

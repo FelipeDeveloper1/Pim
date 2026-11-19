@@ -1,0 +1,9 @@
+data
+.git
+.github
+node_modules
+e2e
+docs
+api/test
+*.md
+.env
