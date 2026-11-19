@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FinanceControl</title>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+  <a class="skip" href="#view">Ir para o conteúdo</a>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">FinanceControl</div>
+      <div class="who"><strong id="quem">…</strong><span id="perfil"></span></div>
+      <nav id="nav" aria-label="Menu principal"></nav>
+      <button class="btn ghost" type="button" id="sair">Sair</button>
+    </aside>
+    <main id="view" tabindex="-1"></main>
+  </div>
+  <dialog id="dlg" aria-labelledby="dlgTitle">
+    <form id="dlgForm" novalidate></form>
+  </dialog>
+  <div id="status" role="status" aria-live="polite"></div>
+  <script src="/shared/vendor/chart.umd.min.js"></script>
+  <script src="/shared/api.js"></script>
+  <script src="/shared/format.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

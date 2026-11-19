@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Criar conta — FinanceControl</title>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body class="auth">
+  <main class="auth-card">
+    <h1>Criar conta</h1>
+    <p class="sub">Sua conta começa com perfil de Operador. Um administrador pode alterar o perfil depois.</p>
+    <form id="form" novalidate>
+      <div class="field"><label for="nome">Nome</label><input id="nome" name="nome" autocomplete="name" required maxlength="120"><small class="err" id="nome_e"></small></div>
+      <div class="field"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="username" required><small class="err" id="email_e"></small></div>
+      <div class="field"><label for="senha">Senha</label><input id="senha" name="senha" type="password" autocomplete="new-password" required aria-describedby="senha_h"><small id="senha_h">Mínimo de 8 caracteres, com letra e número.</small><small class="err" id="senha_e"></small></div>
+      <div class="field"><label for="confirmar">Confirmar senha</label><input id="confirmar" name="confirmar" type="password" autocomplete="new-password" required><small class="err" id="confirmar_e"></small></div>
+      <div id="erro" class="alert" role="alert" hidden></div>
+      <button class="btn" type="submit" id="enviar">Criar conta</button>
+    </form>
+    <p class="alt">Já tem conta? <a href="/index.html">Entrar</a></p>
+  </main>
+  <script src="/shared/api.js"></script>
+  <script src="/js/register.js"></script>
+</body>
+</html>
